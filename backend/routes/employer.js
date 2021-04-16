@@ -1,5 +1,6 @@
 const router = require('express').Router()
 let Employer = require('../modles/employer.model')
+let Project = require('../modles/project.model')
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
 
@@ -7,6 +8,12 @@ router.route('/').get((req, res)=>{
     Employer.find()
         .then(employers=>res.json(employers))
         .catch(err=>res.status(400).json({error: err}))
+})
+
+router.route('/:id').get((req, res)=>{
+    Project.find({employer: req.params.id})
+    .then(projects => res.json({error: null, data: projects}))
+    .catch(err=>res.status(400).json({error: err}))
 })
 
 router.route('/register').post((req, res)=>{
