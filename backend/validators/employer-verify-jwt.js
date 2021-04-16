@@ -1,6 +1,10 @@
 const jwt = require('jsonwebtoken')
 
 const verifyToken = (req, res, next)=>{
+    const regex = new RegExp('\/projects\/apply\/(.)*');
+    if(req.originalUrl === '/projects/' || regex.test(req.originalUrl)===true){
+        return next()
+    }
     const token = req.header('auth-token')
     if(!token)
         return res.status(401).json({error: 'Access denied!'})

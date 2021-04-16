@@ -31,7 +31,6 @@ app.use('/employers', employerRouter)
 app.use('/projects', employerAuth, projectRouter)
 app.use('/apply', freelancerAuth, applyRequestRouter)
 
-
 app.listen(port, ()=>{
     console.log(`Server is running on port: ${port}`)
 })

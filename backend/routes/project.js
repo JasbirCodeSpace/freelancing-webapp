@@ -1,5 +1,6 @@
 const router = require('express').Router()
 let Project = require('../modles/project.model')
+let ApplyRequest = require('../modles/apply-request.model')
 
 router.route('/').get((req, res)=>{
     Project.find()
@@ -28,6 +29,12 @@ router.route('/create').post((req, res)=>{
 router.route('/:id').get((req, res)=>{
     Project.findById(req.params.id)
         .then(project => res.json({error: null, data: project}))
+        .catch(err=>res.status(400).json({error: err}))
+})
+
+router.route('/apply/:id').get((req, res)=>{
+    ApplyRequest.find({project: req.params.id})
+        .then(requests => res.json({error: null, data: requests}))
         .catch(err=>res.status(400).json({error: err}))
 })
 
