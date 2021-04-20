@@ -16,8 +16,8 @@ router.route('/create').post((req, res)=>{
 })
 
 router.route('/:id').get((req, res)=>{
-    ApplyRequest.findById(req.params.id)
-        .then(request => res.json({error: null, data: request}))
+    ApplyRequest.find({project: req.params.id})
+        .then(requests => res.json({error: null, data: requests}))
         .catch(err=>res.status(400).json({error: err}))
 })
 

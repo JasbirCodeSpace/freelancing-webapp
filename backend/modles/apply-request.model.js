@@ -8,5 +8,6 @@ const applyRequestSchema = new Schema({
     timestamps:true,
 })
 
+applyRequestSchema.index({project:1, freelancer:1}, {unique: true});
 const ApplyRequest = mongoose.model('ApplyRequest', applyRequestSchema)
 module.exports = ApplyRequest
